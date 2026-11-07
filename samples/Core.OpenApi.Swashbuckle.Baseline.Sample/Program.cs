@@ -60,4 +60,4 @@ app.UseSwagger();
 app.UseSwaggerUI(ui => ui.SwaggerEndpoint("/swagger/v1/swagger.json", "Baseline API v1"));
 
 app.MapControllers();
-app.Run();
+await app.RunAsync();
