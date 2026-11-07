@@ -304,7 +304,8 @@ echo.
 echo [1/9] Checking nuget.org for an existing %PACKAGE_ID% %VERSION%...
 
 set "VERSION_CHECK="
-for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "$ErrorActionPreference='Stop'; try { $id='%PACKAGE_ID%'.ToLowerInvariant(); $r=Invoke-RestMethod ('https://api.nuget.org/v3-flatcontainer/'+$id+'/index.json') -TimeoutSec 20; if ($r.versions -contains '%VERSION%') { 'PUBLISHED' } else { 'NOT_PUBLISHED' } } catch { $code=0; if ($_.Exception.Response) { $code=[int]$_.Exception.Response.StatusCode }; if ($code -eq 404) { 'NOT_PUBLISHED' } else { 'CHECK_FAILED' } }"`) do set "VERSION_CHECK=%%V"
+powershell -NoProfile -Command "$ErrorActionPreference='Stop'; try { $id='%PACKAGE_ID%'.ToLowerInvariant(); $r=Invoke-RestMethod ('https://api.nuget.org/v3-flatcontainer/'+$id+'/index.json') -TimeoutSec 20; if ($r.versions -contains '%VERSION%') { 'PUBLISHED' } else { 'NOT_PUBLISHED' } } catch { $code=0; if ($_.Exception.Response) { $code=[int]$_.Exception.Response.StatusCode }; if ($code -eq 404) { 'NOT_PUBLISHED' } else { 'CHECK_FAILED' } }" > "%TEMP%\publish-version-check.txt"
+set /p VERSION_CHECK=<"%TEMP%\publish-version-check.txt"
 
 if /i "!VERSION_CHECK!"=="PUBLISHED" (
     echo.
