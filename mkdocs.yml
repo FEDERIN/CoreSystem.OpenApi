@@ -1,0 +1,48 @@
+site_name: CoreSystem.OpenApi
+site_description: OpenAPI/Swagger integration for .NET 8, .NET 9 and .NET 10
+site_author: Federin Pastor Gutierrez Ortiz
+site_url: https://federin.github.io/CoreSystem.OpenApi/
+
+repo_name: FEDERIN/CoreSystem.OpenApi
+repo_url: https://github.com/FEDERIN/CoreSystem.OpenApi
+
+theme:
+  name: material
+  language: en
+
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+
+plugins:
+  - search
+  - mermaid2
+
+extra_javascript:
+  - javascripts/external-documentation-links.js
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+
+nav:
+  - Home: index.md
+
+  - Getting Started: GettingStarted.md
+
+  - Packages:
+      - OpenAPI:
+          - Overview: OpenApi/index.md
+          - Getting Started: OpenApi/GettingStarted.md
+          - Configuration: OpenApi/Configuration.md
+          - Problem Responses: OpenApi/ProblemResponses.md
