@@ -15,9 +15,9 @@ permissions:
 
 jobs:
   smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build and start
         run: docker compose -f samples/Core.OpenApi.Swashbuckle.Baseline.Sample/docker-compose.yml up -d --build
       - name: Wait for Swagger

@@ -1,4 +1,4 @@
-name: Documentation
+﻿name: Documentation
 
 on:
   push:
@@ -30,11 +30,11 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -59,7 +59,7 @@ jobs:
 
     if: github.ref == 'refs/heads/main'
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     environment:
       name: github-pages
