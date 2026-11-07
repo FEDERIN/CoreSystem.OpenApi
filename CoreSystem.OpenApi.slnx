@@ -1,0 +1,45 @@
+<Solution>
+  <Folder Name="/.github/">
+    <File Path=".github/dependabot.yml" />
+    <File Path=".github/pull_request_template.md" />
+  </Folder>
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/baseline-sample-smoke.yml" />
+    <File Path=".github/workflows/ci.yml" />
+    <File Path=".github/workflows/codeql.yml" />
+    <File Path=".github/workflows/documentation.yml" />
+    <File Path=".github/workflows/publish.yml" />
+    <File Path=".github/workflows/samples-smoke-baseline.yml" />
+    <File Path=".github/workflows/samples-smoke.yml" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/GettingStarted.md" />
+    <File Path="docs/index.md" />
+  </Folder>
+  <Folder Name="/docs/OpenApi/">
+    <File Path="docs/OpenApi/Configuration.md" />
+    <File Path="docs/OpenApi/GettingStarted.md" />
+    <File Path="docs/OpenApi/index.md" />
+    <File Path="docs/OpenApi/ProblemResponses.md" />
+  </Folder>
+  <Folder Name="/Elementos de la solución/">
+    <File Path="CORE-SYSTEM-STANDARDS.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="mkdocs.yml" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/Core.OpenApi.Swashbuckle.Baseline.Sample/Core.OpenApi.Swashbuckle.Baseline.Sample.csproj" />
+    <Project Path="samples/Core.OpenApi.Swashbuckle.Sample/Core.OpenApi.Swashbuckle.Sample.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Core.OpenApi.Swashbuckle/Core.OpenApi.Swashbuckle.csproj" />
+    <Project Path="src/Core.OpenApi/Core.OpenApi.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/Directory.Build.props" />
+    <Project Path="tests/Core.OpenApi.Swashbuckle.IntegrationTests/Core.OpenApi.Swashbuckle.IntegrationTests.csproj" />
+    <Project Path="tests/Core.OpenApi.Swashbuckle.UnitTests/Core.OpenApi.Swashbuckle.UnitTests.csproj" />
+    <Project Path="tests/Core.OpenApi.UnitTests/Core.OpenApi.UnitTests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,9 @@
+services:
+  sample-api:
+    build:
+      context: ../..
+      dockerfile: samples/Core.OpenApi.Swashbuckle.Sample/Dockerfile
+    ports:
+      - "5185:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
