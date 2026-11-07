@@ -43,8 +43,8 @@ jobs:
 
       - name: Install documentation dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip --only-binary :all:
+          pip install -r requirements.txt --only-binary :all:
 
       - name: Build documentation
         run: mkdocs build --strict

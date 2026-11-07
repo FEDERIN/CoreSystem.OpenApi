@@ -40,4 +40,4 @@ var app = builder.Build();
 app.UseCoreOpenApi();
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
