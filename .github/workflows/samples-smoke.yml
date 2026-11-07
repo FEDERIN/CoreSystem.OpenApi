@@ -1,0 +1,40 @@
+name: samples-smoke
+
+on:
+  push:
+    paths:
+      - 'samples/Core.OpenApi.Swashbuckle.Sample/**'
+      - 'src/**'
+      - 'Directory.Packages.props'
+      - 'Directory.Build.props'
+      - '.github/workflows/samples-smoke.yml'
+  pull_request:
+    paths:
+      - 'samples/Core.OpenApi.Swashbuckle.Sample/**'
+      - 'src/**'
+      - 'Directory.Packages.props'
+      - 'Directory.Build.props'
+      - '.github/workflows/samples-smoke.yml'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start
+        run: docker compose -f samples/Core.OpenApi.Swashbuckle.Sample/docker-compose.yml up -d --build
+      - name: Wait for Swagger
+        run: |
+          for i in $(seq 1 30); do
+            curl -fsS http://localhost:5185/swagger/index.html >/dev/null && break
+            sleep 2
+          done
+          curl -fsS http://localhost:5185/swagger/index.html
+      - name: Verify swagger.json
+        run: curl -fsS http://localhost:5185/swagger/v1/swagger.json | head -c 200
+      - name: Dump logs
+        if: failure()
+        run: docker compose -f samples/Core.OpenApi.Swashbuckle.Sample/docker-compose.yml logs
+      - name: Tear down
+        if: always()
+        run: docker compose -f samples/Core.OpenApi.Swashbuckle.Sample/docker-compose.yml down

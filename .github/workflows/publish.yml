@@ -1,0 +1,151 @@
+name: Publish NuGet Package
+
+on:
+  push:
+    tags:
+      - '*/v*'
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Extract info
+        run: |
+          PROJECT_NAME=$(echo "$GITHUB_REF_NAME" | cut -d'/' -f1)
+          VERSION=$(echo "$GITHUB_REF_NAME" | cut -d'/' -f2 | sed 's/^v//')
+
+          echo "PROJECT=$PROJECT_NAME" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Resolve publish project and its tests
+        run: |
+          PROJECT_PATH="src/$PROJECT/$PROJECT.csproj"
+
+          if [ ! -f "$PROJECT_PATH" ]; then
+            echo "Error: Package project '$PROJECT_PATH' does not exist."
+            exit 1
+          fi
+
+          case "$PROJECT" in
+            Core.OpenApi)
+              TEST_PROJECTS="tests/Core.OpenApi.UnitTests/Core.OpenApi.UnitTests.csproj"
+              ;;
+            Core.OpenApi.Swashbuckle)
+              TEST_PROJECTS="tests/Core.OpenApi.Swashbuckle.UnitTests/Core.OpenApi.Swashbuckle.UnitTests.csproj tests/Core.OpenApi.Swashbuckle.IntegrationTests/Core.OpenApi.Swashbuckle.IntegrationTests.csproj"
+              ;;
+            *)
+              echo "Error: No test-project mapping exists for '$PROJECT'."
+              exit 1
+              ;;
+          esac
+
+          echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
+          echo "TEST_PROJECTS=$TEST_PROJECTS" >> $GITHUB_ENV
+
+          PACKAGE_ID=$(grep -oPm1 '(?<=<PackageId>)[^<]+' "$PROJECT_PATH")
+          if [ -z "$PACKAGE_ID" ]; then
+            echo "Error: could not read <PackageId> from '$PROJECT_PATH'."
+            exit 1
+          fi
+
+          echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
+
+      - name: Restore package project and its tests
+        run: |
+          dotnet restore "$PROJECT_PATH" --locked-mode
+
+          for test_project in $TEST_PROJECTS; do
+            dotnet restore "$test_project" --locked-mode
+          done
+
+      - name: Build package project
+        run: |
+          dotnet build "$PROJECT_PATH" \
+            --configuration Release \
+            --no-restore \
+            /p:Version=$VERSION
+
+      - name: Test package project
+        run: |
+          for test_project in $TEST_PROJECTS; do
+            dotnet test --project "$test_project" \
+              --configuration Release \
+              --no-restore \
+              /p:Version=$VERSION
+          done
+
+      - name: Pack package
+        run: |
+          rm -rf ./nupkgs
+          dotnet pack "$PROJECT_PATH" \
+            --configuration Release \
+            /p:Version=$VERSION \
+            --no-build \
+            --no-restore \
+            --output ./nupkgs
+
+          EXPECTED="./nupkgs/$PACKAGE_ID.$VERSION.nupkg"
+          if [ ! -f "$EXPECTED" ]; then
+            echo "Error: expected '$EXPECTED' but it was not produced."
+            ls -la ./nupkgs || true
+            exit 1
+          fi
+
+          COUNT=$(find ./nupkgs -maxdepth 1 -name '*.nupkg' | wc -l)
+          if [ "$COUNT" -ne 1 ]; then
+            echo "Error: expected exactly 1 nupkg in ./nupkgs, found $COUNT."
+            ls -la ./nupkgs || true
+            exit 1
+          fi
+
+          echo "PACKAGE_PATH=$EXPECTED" >> $GITHUB_ENV
+
+      - name: NuGet login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish to NuGet
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push "$PACKAGE_PATH" \
+            --api-key "$NUGET_API_KEY" \
+            --source "https://api.nuget.org/v3/index.json"
+
+      - name: Configure GitHub Packages
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          dotnet nuget add source \
+            --username "$GITHUB_ACTOR" \
+            --password "$GITHUB_TOKEN" \
+            --store-password-in-clear-text \
+            --name github \
+            "https://nuget.pkg.github.com/$GITHUB_REPOSITORY_OWNER/index.json"
+
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet nuget push "$PACKAGE_PATH" \
+            --source github \
+            --api-key "$GITHUB_TOKEN"

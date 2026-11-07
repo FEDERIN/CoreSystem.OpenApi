@@ -1,0 +1,43 @@
+name: Baseline Sample Smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - samples/Core.OpenApi.Swashbuckle.Baseline.Sample/**
+      - .github/workflows/baseline-sample-smoke.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - samples/Core.OpenApi.Swashbuckle.Baseline.Sample/**
+      - .github/workflows/baseline-sample-smoke.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the sample
+        working-directory: samples/Core.OpenApi.Swashbuckle.Baseline.Sample
+        run: docker compose up -d --build
+      - name: Wait for Swagger UI
+        run: |
+          for i in $(seq 1 24); do
+            if curl -fsS http://localhost:5186/swagger/index.html >/dev/null; then
+              echo "Swagger UI is up"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Sample did not become ready"
+          exit 1
+      - name: Verify OpenAPI JSON
+        run: curl -fsS http://localhost:5186/swagger/v1/swagger.json >/dev/null
+      - name: Tear down
+        if: always()
+        working-directory: samples/Core.OpenApi.Swashbuckle.Baseline.Sample
+        run: docker compose down -v
