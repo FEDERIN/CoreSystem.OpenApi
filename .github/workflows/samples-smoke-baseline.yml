@@ -10,6 +10,9 @@ on:
       - 'samples/Core.OpenApi.Swashbuckle.Baseline.Sample/**'
       - '.github/workflows/samples-smoke-baseline.yml'
 
+permissions:
+  contents: read
+
 jobs:
   smoke:
     runs-on: ubuntu-latest
