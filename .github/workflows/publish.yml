@@ -148,4 +148,5 @@ jobs:
         run: |
           dotnet nuget push "$PACKAGE_PATH" \
             --source github \
-            --api-key "$GITHUB_TOKEN"
+            --api-key "$GITHUB_TOKEN" \
+            --skip-duplicate
