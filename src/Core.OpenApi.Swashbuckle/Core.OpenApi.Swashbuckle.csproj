@@ -28,12 +28,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CoreSystem.OpenApi" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\Core.OpenApi\Core.OpenApi.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
