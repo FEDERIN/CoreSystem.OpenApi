@@ -1,4 +1,4 @@
-name: Baseline Sample Smoke
+﻿name: Baseline Sample Smoke
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: samples-smoke-baseline
+﻿name: samples-smoke-baseline
 
 on:
   push:

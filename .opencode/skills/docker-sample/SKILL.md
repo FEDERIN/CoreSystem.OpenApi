@@ -50,6 +50,7 @@ ENTRYPOINT ["dotnet", "<Sample>.dll"]
 
 ## samples-smoke.yml (.github/workflows/)
 
+- Always include a top-level `permissions: contents: read` block.
 - Trigger on changes to the sample, `src/`, props, and the workflow itself.
 - `docker compose up -d --build`, wait for `/swagger/index.html`, verify `/swagger/v1/swagger.json`.
 - Dump logs on failure, tear down with `if: always()`.
