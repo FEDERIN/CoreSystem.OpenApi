@@ -6,17 +6,16 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<PackageId>CoreSystem.OpenApi.Swashbuckle</PackageId>
-		<Version>1.0.0</Version>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
-		<InformationalVersion>1.0.0</InformationalVersion>
+		<Version>1.1.0</Version>
+		<AssemblyVersion>1.1.0.0</AssemblyVersion>
+		<FileVersion>1.1.0.0</FileVersion>
+		<InformationalVersion>1.1.0</InformationalVersion>
 		<Authors>Federin Pastor Gutierrez Ortiz</Authors>
 		<Description>Reusable OpenAPI and Swagger infrastructure for ASP.NET Core APIs.</Description>
 		<PackageTags>OpenAPI;Swagger;Swashbuckle;ASP.NET Core;Documentation;Problem Details;.NET8</PackageTags>
 		<PackageReleaseNotes>
-			Initial release. Swagger generation wiring, response attributes, operation and document
-			filters, and a configurable OpenAPI document patcher that turns inline error responses
-			into shared component references.
+			1.1.0: Added ProducesConflictProblemAttribute (HTTP 409) for documenting conflict
+			problem responses. Minor version bump.
 		</PackageReleaseNotes>
 
 		<RepositoryUrl>https://github.com/FEDERIN/CoreSystem</RepositoryUrl>
