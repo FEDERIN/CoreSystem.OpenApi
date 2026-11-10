@@ -352,19 +352,8 @@ REM ---------------------------------------------------------------------------
 REM  Verify contents and dependencies, not just the file's existence
 REM ---------------------------------------------------------------------------
 REM  A successful build proves nothing about what consumers receive. This check
-REM  is also the last gate on the failure mode that has actually bitten this
-REM  repo: Core.Observability, Core.RateLimiting and Core.Resilience all take a
-REM  PackageReference on CoreSystem.Observability.Abstractions, and NuGet
-REM  resolves to the declared floor. Tagging them while the central pin lags
-REM  puts a live package on the feed whose dependency silently stays old, which
-REM  is what forced the 1.0.2 / 1.2.2 / 2.0.2 "package-only fix" releases.
-REM
-REM  Two failure modes are caught here:
-REM    - the declared CoreSystem.* version does not exist on nuget.org at all,
-REM      which publishes a package nothing can restore;
-REM    - it exists but is older than the latest published version, which means
-REM      the central pin in Directory.Packages.props was not bumped and
-REM      re-restored before tagging.
+REM  verifies the package contents and that any CoreSystem.* dependency declared
+REM  in the nuspec is already published on nuget.org at the pinned version.
 
 echo       verifying contents and published dependencies...
 
@@ -429,21 +418,8 @@ echo publish.yml is now running. Watch it with:
 echo.
 echo   gh run watch
 echo.
-echo Publish order is dependency-first, not reverse. In this repo the only
-echo intra-repo edges are:
-echo.
-echo   Core.Observability.Abstractions -^> Core.Observability
-echo   Core.Observability.Abstractions -^> Core.RateLimiting
-echo   Core.Observability.Abstractions -^> Core.Resilience
-echo.
-echo Core.OpenApi and Core.OpenApi.Swashbuckle. Core.OpenApi.Swashbuckle
-echo depends on Core.OpenApi, so publish Core.OpenApi first.
-rem  they can be tagged at any time.
-echo.
-rem  Concretely, for the two-phase refresh: tag Abstractions first, then bump
-rem  its pin in Directory.Packages.props and re-restore, and only then tag
-rem  Resilience, RateLimiting and Observability. Step 8 refuses to tag them
-rem  while the pin still lags, so the mistake cannot reach the feed.
+echo Publish order is dependency-first: Core.OpenApi.Swashbuckle depends on
+echo Core.OpenApi, so publish Core.OpenApi first.
 echo.
 echo A failure in the last tag leaves the earlier ones live. That is recoverable:
 echo re-push the tag after fixing, and publish.yml's --skip-duplicate makes a
