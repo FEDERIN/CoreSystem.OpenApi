@@ -57,7 +57,7 @@
       "CoreSystem.OpenApi.Swashbuckle": {
         "type": "Project",
         "dependencies": {
-          "CoreSystem.OpenApi": "[2.0.0, )",
+          "CoreSystem.OpenApi": "[2.1.0, )",
           "Swashbuckle.AspNetCore.SwaggerGen": "[9.0.6, )",
           "Swashbuckle.AspNetCore.SwaggerUI": "[10.3.1, )"
         }
@@ -140,7 +140,7 @@
       "CoreSystem.OpenApi.Swashbuckle": {
         "type": "Project",
         "dependencies": {
-          "CoreSystem.OpenApi": "[2.0.0, )",
+          "CoreSystem.OpenApi": "[2.1.0, )",
           "Swashbuckle.AspNetCore.SwaggerGen": "[9.0.6, )",
           "Swashbuckle.AspNetCore.SwaggerUI": "[10.3.1, )"
         }
@@ -223,7 +223,7 @@
       "CoreSystem.OpenApi.Swashbuckle": {
         "type": "Project",
         "dependencies": {
-          "CoreSystem.OpenApi": "[2.0.0, )",
+          "CoreSystem.OpenApi": "[2.1.0, )",
           "Swashbuckle.AspNetCore.SwaggerGen": "[9.0.6, )",
           "Swashbuckle.AspNetCore.SwaggerUI": "[10.3.1, )"
         }

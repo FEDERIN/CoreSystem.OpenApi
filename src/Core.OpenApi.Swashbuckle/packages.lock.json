@@ -4,9 +4,9 @@
     "net10.0": {
       "CoreSystem.OpenApi": {
         "type": "Direct",
-        "requested": "[2.0.0, )",
-        "resolved": "2.0.0",
-        "contentHash": "F/P6jQ3dRAgCqLq+MeRc9LbiDXgwS4DL/Z3P6nm0pXMLkjIkDVJ9ZgiYFSCSQ+Fa90joD+MW0PHLbz19ZT+qDw==",
+        "requested": "[2.1.0, )",
+        "resolved": "2.1.0",
+        "contentHash": "/H8tuO2ypvhlBsSdOXTct1VyEMYX8eQFxDn82Q83C1aKmhetVzb7aeWFZ4DSS/dFAl4QY+d/jKONcqaEaifi5A==",
         "dependencies": {
           "Microsoft.OpenApi": "1.6.25"
         }
@@ -74,9 +74,9 @@
     "net8.0": {
       "CoreSystem.OpenApi": {
         "type": "Direct",
-        "requested": "[2.0.0, )",
-        "resolved": "2.0.0",
-        "contentHash": "F/P6jQ3dRAgCqLq+MeRc9LbiDXgwS4DL/Z3P6nm0pXMLkjIkDVJ9ZgiYFSCSQ+Fa90joD+MW0PHLbz19ZT+qDw==",
+        "requested": "[2.1.0, )",
+        "resolved": "2.1.0",
+        "contentHash": "/H8tuO2ypvhlBsSdOXTct1VyEMYX8eQFxDn82Q83C1aKmhetVzb7aeWFZ4DSS/dFAl4QY+d/jKONcqaEaifi5A==",
         "dependencies": {
           "Microsoft.OpenApi": "1.6.25"
         }
@@ -144,9 +144,9 @@
     "net9.0": {
       "CoreSystem.OpenApi": {
         "type": "Direct",
-        "requested": "[2.0.0, )",
-        "resolved": "2.0.0",
-        "contentHash": "F/P6jQ3dRAgCqLq+MeRc9LbiDXgwS4DL/Z3P6nm0pXMLkjIkDVJ9ZgiYFSCSQ+Fa90joD+MW0PHLbz19ZT+qDw==",
+        "requested": "[2.1.0, )",
+        "resolved": "2.1.0",
+        "contentHash": "/H8tuO2ypvhlBsSdOXTct1VyEMYX8eQFxDn82Q83C1aKmhetVzb7aeWFZ4DSS/dFAl4QY+d/jKONcqaEaifi5A==",
         "dependencies": {
           "Microsoft.OpenApi": "1.6.25"
         }
