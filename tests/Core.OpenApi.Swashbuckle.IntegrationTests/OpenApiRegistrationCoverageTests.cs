@@ -6,6 +6,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Core.OpenApi.Swashbuckle.IntegrationTests;
 
+[Collection("ProcessEnvironment")]
 public class OpenApiRegistrationCoverageTests
 {
     [Fact]
