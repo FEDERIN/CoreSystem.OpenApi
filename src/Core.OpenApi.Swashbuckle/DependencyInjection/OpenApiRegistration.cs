@@ -65,14 +65,16 @@ public static class OpenApiRegistration
                 var existing = new HashSet<string>(options.Servers.Select(s => s.Url), StringComparer.OrdinalIgnoreCase);
                 foreach (var url in urls.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
                 {
-                    if (existing.Add(url))
+                    if (IsWildcardListenAddress(url) || !existing.Add(url))
                     {
-                        options.Servers.Add(new OpenApiServerDescriptor
-                        {
-                            Url = url,
-                            Description = "Local"
-                        });
+                        continue;
                     }
+
+                    options.Servers.Add(new OpenApiServerDescriptor
+                    {
+                        Url = url,
+                        Description = "Local"
+                    });
                 }
             }
         }
@@ -86,6 +88,24 @@ public static class OpenApiRegistration
         services.AddSwaggerGen(gen => ConfigureSwaggerGen(gen, options));
 
         return services;
+    }
+
+    /// <summary>
+    /// Determines whether a listen address uses a wildcard host, such as <c>http://+:8080</c>,
+    /// which is a binding pattern rather than an address a client can call.
+    /// </summary>
+    /// <param name="url">The listen address.</param>
+    /// <returns><see langword="true"/> when the host is a wildcard; otherwise, <see langword="false"/>.</returns>
+    private static bool IsWildcardListenAddress(string url)
+    {
+        var schemeEnd = url.IndexOf("://", StringComparison.Ordinal);
+        var authority = schemeEnd < 0 ? url : url[(schemeEnd + 3)..];
+        var host = authority.Split('/', 2)[0];
+        host = host.StartsWith('[')
+            ? host[..(host.IndexOf(']') + 1)]
+            : host.Split(':')[0];
+
+        return host is "+" or "*" or "0.0.0.0" or "[::]";
     }
 
     /// <summary>

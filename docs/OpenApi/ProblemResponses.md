@@ -18,6 +18,12 @@ builder.Services.AddCoreOpenApi(options =>
 });
 ```
 
+`SchemaId` names the component that every problem response references. Its default
+is `ProblemDetails`, so the document only resolves when your API has a schema with that
+exact name. If your error type is `CoreProblemDetails` (the type shipped by this
+library), set `SchemaId = "CoreProblemDetails"`; otherwise the generated document
+contains a dangling `$ref`.
+
 `IncludeWhenMissing` defaults to `false`, so a status code is only added to
 operations that already declare it. An existing `400` is replaced only when it
 already looks like a problem response.
