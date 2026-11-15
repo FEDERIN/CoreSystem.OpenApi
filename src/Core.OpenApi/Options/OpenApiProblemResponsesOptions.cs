@@ -29,9 +29,9 @@ public sealed class OpenApiProblemResponsesOptions
     /// </summary>
     /// <value>
     /// The schema component name used when a definition does not declare its own.
-    /// The default value is <c>ProblemDetails</c>.
+    /// The default value is <c>CoreProblemDetails</c>, the problem type shipped by this library.
     /// </value>
-    public string SchemaId { get; set; } = "ProblemDetails";
+    public string SchemaId { get; set; } = "CoreProblemDetails";
 
     /// <summary>
     /// Gets or sets the media type used by the responses.
@@ -69,10 +69,10 @@ public sealed class OpenApiProblemResponsesOptions
     /// The schema names used by
     /// <see cref="ProblemResponseReplacementMode.WhenContentMatchesProblemDetails"/> to
     /// decide whether an existing response already describes a problem. The collection
-    /// contains <c>ProblemDetails</c> and <c>ValidationProblemDetails</c> by default.
+    /// contains <c>CoreProblemDetails</c>, <c>ProblemDetails</c> and <c>ValidationProblemDetails</c> by default.
     /// </value>
     public IList<string> ProblemSchemaIds { get; } =
-        new List<string> { "ProblemDetails", "ValidationProblemDetails" };
+        new List<string> { "CoreProblemDetails", "ProblemDetails", "ValidationProblemDetails" };
 
     /// <summary>
     /// Gets the response catalog.
