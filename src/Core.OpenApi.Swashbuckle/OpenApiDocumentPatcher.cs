@@ -44,11 +44,6 @@ public static class OpenApiDocumentPatcher
         ArgumentNullException.ThrowIfNull(document);
         ArgumentNullException.ThrowIfNull(options);
 
-        if (!options.Enabled)
-        {
-            return document;
-        }
-
         JsonNode? parsed;
         try
         {

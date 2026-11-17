@@ -16,15 +16,6 @@ public sealed class OpenApiProblemResponsesOptions
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the responses are registered.
-    /// </summary>
-    /// <value>
-    /// <see langword="true"/> to create the components and rewrite operations; otherwise,
-    /// <see langword="false"/>. The default value is <see langword="true"/>.
-    /// </value>
-    public bool Enabled { get; set; } = true;
-
-    /// <summary>
     /// Gets or sets the default schema identifier referenced by the responses.
     /// </summary>
     /// <value>
