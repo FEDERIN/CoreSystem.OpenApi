@@ -28,11 +28,28 @@ signature accuracy of code examples, also apply the `docs-accuracy` skill.
 7. **Keep docs aligned with `src/`.** Page content (type names, signatures, package ids,
    install commands, code examples) must match the actual source. For detailed
    accuracy checks, also apply the `docs-accuracy` skill.
-8. **READMEs feed the site.** Package READMEs (`src/*/README.md`) are the source of
-   truth for package-level content. When building or updating the site, mirror
-   their accurate content into `docs/` pages, but only after verifying the README
-   is up to date with the source (apply `docs-accuracy`). Do not copy stale
-   README content into the site.
+8. **Badges.** Package pages carry the same badge block as their package README
+   (NuGet, Downloads, License, .NET) with `style=for-the-badge`. This includes the
+   root `docs/index.md` (the `CoreSystem.OpenApi` package page) and each package
+   index such as `docs/Swashbuckle/index.md`.
+9. **Emoji headings.** Docs pages use the same emoji vocabulary as the package
+   READMEs (see the `readme` skill), so the site matches the registry listing:
+   - ⚡ package / title
+   - ✨ features
+   - 📦 installation
+   - 🚀 quick start
+   - 🧩 components
+   - ⚙️ configuration
+   - 🏗 architecture
+   - 📖 documentation
+   - 🤝 contributing
+   - 📄 license
+   - ✅ feature bullets
+10. **READMEs feed the site.** Package READMEs (`src/*/README.md`) are the source of
+    truth for package-level content. When building or updating the site, mirror
+    their accurate content into `docs/` pages, but only after verifying the README
+    is up to date with the source (apply `docs-accuracy`). Do not copy stale
+    README content into the site.
 
 ## Verification
 

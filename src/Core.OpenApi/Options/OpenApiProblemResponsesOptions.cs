@@ -31,7 +31,26 @@ public sealed class OpenApiProblemResponsesOptions
     /// The schema component name used when a definition does not declare its own.
     /// The default value is <c>CoreProblemDetails</c>, the problem type shipped by this library.
     /// </value>
-    public string SchemaId { get; set; } = "CoreProblemDetails";
+    public string SchemaId { get; set; } = DefaultSchemaId;
+
+    private const string DefaultSchemaId = "CoreProblemDetails";
+    private const string DefaultValidationSchemaId = "CoreValidationProblemDetails";
+    private string? _validationSchemaId;
+
+    /// <summary>
+    /// Gets or sets the schema identifier referenced by the validation (<c>400</c>) response.
+    /// </summary>
+    /// <value>
+    /// The schema component name of the <c>ValidationError</c> response. When not set, the value
+    /// is <c>CoreValidationProblemDetails</c> while <see cref="SchemaId"/> keeps its default, and
+    /// <see cref="SchemaId"/> otherwise.
+    /// </value>
+    public string ValidationSchemaId
+    {
+        get => _validationSchemaId
+            ?? (SchemaId == DefaultSchemaId ? DefaultValidationSchemaId : SchemaId);
+        set => _validationSchemaId = value;
+    }
 
     /// <summary>
     /// Gets or sets the media type used by the responses.
@@ -72,7 +91,7 @@ public sealed class OpenApiProblemResponsesOptions
     /// contains <c>CoreProblemDetails</c>, <c>ProblemDetails</c> and <c>ValidationProblemDetails</c> by default.
     /// </value>
     public IList<string> ProblemSchemaIds { get; } =
-        new List<string> { "CoreProblemDetails", "ProblemDetails", "ValidationProblemDetails" };
+        ["CoreProblemDetails", "ProblemDetails", "ValidationProblemDetails"];
 
     /// <summary>
     /// Gets the response catalog.
@@ -98,7 +117,6 @@ public sealed class OpenApiProblemResponsesOptions
             Title = "Validation error",
             Description = "Validation error",
             Detail = "One or more validation errors occurred.",
-            SchemaId = "ValidationProblemDetails",
             Replacement = ProblemResponseReplacementMode.WhenContentMatchesProblemDetails
         };
 

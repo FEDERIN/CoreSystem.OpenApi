@@ -44,6 +44,9 @@ using Core.OpenApi.Attributes;
 public async Task<IActionResult> Create(CreateOrderRequest request)
 ```
 
+> **Note:** C# allows omitting the `Attribute` suffix, so `[ProducesCreated<OrderResponse>]`
+> is equivalent to `[ProducesCreatedAttribute<OrderResponse>]`. Both forms compile.
+
 ---
 
 ## 🧩 Public API
@@ -58,7 +61,7 @@ public async Task<IActionResult> Create(CreateOrderRequest request)
 | `ProblemResponseDefinition` | One response: status code, component, error code and example. |
 | `ProblemResponseReplacementMode` | Replacement behavior for existing responses. |
 | `ProducesOkAttribute<T>` / `ProducesCreatedAttribute<T>` / `ProducesNoContentAttribute` | Response attributes. |
-| `ProducesNotFoundProblemAttribute` / `ProducesValidationProblemAttribute` / `ProducesTooManyRequestsProblemAttribute` | Problem response attributes. |
+| `ProducesNotFoundProblemAttribute` / `ProducesValidationProblemAttribute` / `ProducesTooManyRequestsProblemAttribute` / `ProducesConflictProblemAttribute` | Problem response attributes. |
 
 ---
 

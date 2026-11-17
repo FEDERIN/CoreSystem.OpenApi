@@ -23,9 +23,6 @@ plugins:
   - search
   - mermaid2
 
-extra_javascript:
-  - javascripts/external-documentation-links.js
-
 markdown_extensions:
   - admonition
   - tables
@@ -37,12 +34,12 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-
   - Getting Started: GettingStarted.md
+  - Attributes: Attributes.md
 
   - Packages:
-      - OpenAPI:
-          - Overview: OpenApi/index.md
-          - Getting Started: OpenApi/GettingStarted.md
-          - Configuration: OpenApi/Configuration.md
-          - Problem Responses: OpenApi/ProblemResponses.md
+      - Swashbuckle:
+          - Overview: Swashbuckle/index.md
+          - Getting Started: Swashbuckle/GettingStarted.md
+          - Configuration: Swashbuckle/Configuration.md
+          - Problem Responses: Swashbuckle/ProblemResponses.md

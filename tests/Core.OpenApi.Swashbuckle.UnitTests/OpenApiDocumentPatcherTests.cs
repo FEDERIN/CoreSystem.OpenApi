@@ -357,6 +357,50 @@ public sealed class OpenApiDocumentPatcherTests
     }
 
     [Fact]
+    public void Patch_ValidationResponseFollowsSchemaId_WhenValidationSchemaIdIsNotSet()
+    {
+        var options = new OpenApiProblemResponsesOptions { SchemaId = "AppProblemDetails" };
+
+        var input = """
+        {
+          "openapi": "3.0.4",
+          "info": { "title": "X", "version": "v1" }
+        }
+        """;
+
+        var components = ComponentsResponses(OpenApiDocumentPatcher.Patch(input, options));
+
+        components["ValidationError"]!["content"]!["application/problem+json"]!["schema"]!["$ref"]!
+            .GetValue<string>()
+            .Should()
+            .Be("#/components/schemas/AppProblemDetails");
+    }
+
+    [Fact]
+    public void Patch_ValidationResponseUsesValidationSchemaId_WhenSetExplicitly()
+    {
+        var options = new OpenApiProblemResponsesOptions
+        {
+            SchemaId = "AppProblemDetails",
+            ValidationSchemaId = "AppValidationProblemDetails"
+        };
+
+        var input = """
+        {
+          "openapi": "3.0.4",
+          "info": { "title": "X", "version": "v1" }
+        }
+        """;
+
+        var components = ComponentsResponses(OpenApiDocumentPatcher.Patch(input, options));
+
+        components["ValidationError"]!["content"]!["application/problem+json"]!["schema"]!["$ref"]!
+            .GetValue<string>()
+            .Should()
+            .Be("#/components/schemas/AppValidationProblemDetails");
+    }
+
+    [Fact]
     public void Patch_KeepsExistingComponent_WhenGeneratorAlreadyDeclaredIt()
     {
         var input = """
