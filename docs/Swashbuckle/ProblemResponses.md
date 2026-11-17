@@ -43,8 +43,7 @@ builder.Services.AddCoreOpenApi(options =>
 ```
 
 The shared schemas `CoreProblemDetails` and `CoreValidationProblemDetails` are always
-registered in `components.schemas` while `ProblemResponses.Enabled` is `true`, even when no
-operation uses them directly. This prevents the `Could not resolve reference` error for
+registered in `components.schemas`, even when no operation uses them directly. This prevents the `Could not resolve reference` error for
 responses such as `429` that are added to every operation.
 
 `ValidationSchemaId` names the schema of the validation (`400`) response, `ValidationError`.

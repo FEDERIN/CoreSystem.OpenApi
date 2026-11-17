@@ -18,16 +18,6 @@ public sealed class OpenApiDocumentPatcherTests
     }
 
     [Fact]
-    public void Patch_WhenDisabled_ReturnsOriginal()
-    {
-        var input = """{ "openapi": "3.0.4" }""";
-
-        var output = OpenApiDocumentPatcher.Patch(input, new OpenApiProblemResponsesOptions { Enabled = false });
-
-        output.Should().Be(input);
-    }
-
-    [Fact]
     public void Patch_WhenJsonHasNoPaths_StillAddsCommonResponses()
     {
         var input = """

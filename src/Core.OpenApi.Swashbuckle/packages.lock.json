@@ -2,15 +2,6 @@
   "version": 2,
   "dependencies": {
     "net10.0": {
-      "CoreSystem.OpenApi": {
-        "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "/H8tuO2ypvhlBsSdOXTct1VyEMYX8eQFxDn82Q83C1aKmhetVzb7aeWFZ4DSS/dFAl4QY+d/jKONcqaEaifi5A==",
-        "dependencies": {
-          "Microsoft.OpenApi": "1.6.25"
-        }
-      },
       "Microsoft.SourceLink.GitHub": {
         "type": "Direct",
         "requested": "[10.0.402, )",
@@ -54,6 +45,12 @@
         "type": "Transitive",
         "resolved": "10.0.13",
         "contentHash": "ZlcywyQ7FJmgOV2nctdfOEPGS0kRK8T2CdOoPr6F4HPYpmjSo6GQfj3yTyOzNO6B+2U84/JKSPkJJMWqLmVsMw=="
+      },
+      "CoreSystem.OpenApi": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.OpenApi": "[1.6.25, )"
+        }
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "CentralTransitive",
@@ -72,15 +69,6 @@
       }
     },
     "net8.0": {
-      "CoreSystem.OpenApi": {
-        "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "/H8tuO2ypvhlBsSdOXTct1VyEMYX8eQFxDn82Q83C1aKmhetVzb7aeWFZ4DSS/dFAl4QY+d/jKONcqaEaifi5A==",
-        "dependencies": {
-          "Microsoft.OpenApi": "1.6.25"
-        }
-      },
       "Microsoft.SourceLink.GitHub": {
         "type": "Direct",
         "requested": "[10.0.402, )",
@@ -124,6 +112,12 @@
         "type": "Transitive",
         "resolved": "10.0.13",
         "contentHash": "ZlcywyQ7FJmgOV2nctdfOEPGS0kRK8T2CdOoPr6F4HPYpmjSo6GQfj3yTyOzNO6B+2U84/JKSPkJJMWqLmVsMw=="
+      },
+      "CoreSystem.OpenApi": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.OpenApi": "[1.6.25, )"
+        }
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "CentralTransitive",
@@ -142,15 +136,6 @@
       }
     },
     "net9.0": {
-      "CoreSystem.OpenApi": {
-        "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "/H8tuO2ypvhlBsSdOXTct1VyEMYX8eQFxDn82Q83C1aKmhetVzb7aeWFZ4DSS/dFAl4QY+d/jKONcqaEaifi5A==",
-        "dependencies": {
-          "Microsoft.OpenApi": "1.6.25"
-        }
-      },
       "Microsoft.SourceLink.GitHub": {
         "type": "Direct",
         "requested": "[10.0.402, )",
@@ -194,6 +179,12 @@
         "type": "Transitive",
         "resolved": "10.0.13",
         "contentHash": "ZlcywyQ7FJmgOV2nctdfOEPGS0kRK8T2CdOoPr6F4HPYpmjSo6GQfj3yTyOzNO6B+2U84/JKSPkJJMWqLmVsMw=="
+      },
+      "CoreSystem.OpenApi": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.OpenApi": "[1.6.25, )"
+        }
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "CentralTransitive",
