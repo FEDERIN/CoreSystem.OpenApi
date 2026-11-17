@@ -48,9 +48,10 @@ operation uses them directly. This prevents the `Could not resolve reference` er
 responses such as `429` that are added to every operation.
 
 `ValidationSchemaId` names the schema of the validation (`400`) response, `ValidationError`.
-Its default is `CoreValidationProblemDetails`, the body documented by
-`ProducesValidationProblemAttribute`. Set it only when your API returns its own validation
-type, and make sure that schema exists in the document.
+When it is not set, the `400` response uses `CoreValidationProblemDetails` (the body documented by
+`ProducesValidationProblemAttribute`) while `SchemaId` keeps its default. If you change
+`SchemaId`, the `400` response follows it. Set `ValidationSchemaId` explicitly when your API
+returns a different validation type, and make sure that schema exists in the document.
 
 `IncludeWhenMissing` defaults to `false`, so a status code is only added to
 operations that already declare it. An existing `400` is replaced only when it

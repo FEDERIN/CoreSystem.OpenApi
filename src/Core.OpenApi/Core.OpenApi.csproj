@@ -15,8 +15,9 @@
 			2.2.0: BREAKING. Default problem schemas are now CoreProblemDetails (replaces ProblemDetails)
 			and CoreValidationProblemDetails (replaces ValidationProblemDetails for the 400 response).
 			OpenApiProblemResponsesOptions.SchemaId defaults to CoreProblemDetails, ProblemSchemaIds
-			includes CoreProblemDetails by default, and the new ValidationSchemaId property controls the
-			400 schema. To restore the previous schema names, set SchemaId = "ProblemDetails" and
+			includes CoreProblemDetails by default. The new ValidationSchemaId property controls the
+			400 schema; when it is not set, the 400 schema is CoreValidationProblemDetails while SchemaId
+			keeps its default, and follows SchemaId otherwise. To restore the previous schema names, set SchemaId = "ProblemDetails" and
 			ValidationSchemaId = "ValidationProblemDetails", and keep both names in ProblemSchemaIds.
 			Consumers that reference ProblemDetails or ValidationProblemDetails in generated clients must
 			update those references.

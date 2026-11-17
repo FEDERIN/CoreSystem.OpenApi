@@ -64,8 +64,9 @@ public sealed class ProblemResponseDefinition
     /// </summary>
     /// <value>
     /// The schema component identifier. When the value is <see langword="null"/>,
-    /// <see cref="OpenApiProblemResponsesOptions.SchemaId"/> is used. The default value is
-    /// <see langword="null"/>.
+    /// <see cref="OpenApiProblemResponsesOptions.SchemaId"/> is used, or
+    /// <see cref="OpenApiProblemResponsesOptions.ValidationSchemaId"/> for the <c>400</c> response.
+    /// The default value is <see langword="null"/>.
     /// </value>
     public string? SchemaId { get; set; }
 

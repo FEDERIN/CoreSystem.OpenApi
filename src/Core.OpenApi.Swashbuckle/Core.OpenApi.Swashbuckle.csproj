@@ -31,7 +31,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CoreSystem.OpenApi" />
+		<PackageReference Include="CoreSystem.OpenApi" Condition="'$(UseLocalProjectReferences)' != 'true'" />
+		<ProjectReference Include="..\Core.OpenApi\Core.OpenApi.csproj" Condition="'$(UseLocalProjectReferences)' == 'true'" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
 	</ItemGroup>

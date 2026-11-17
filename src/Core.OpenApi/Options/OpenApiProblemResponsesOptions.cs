@@ -31,29 +31,25 @@ public sealed class OpenApiProblemResponsesOptions
     /// The schema component name used when a definition does not declare its own.
     /// The default value is <c>CoreProblemDetails</c>, the problem type shipped by this library.
     /// </value>
-    public string SchemaId { get; set; } = "CoreProblemDetails";
+    public string SchemaId { get; set; } = DefaultSchemaId;
+
+    private const string DefaultSchemaId = "CoreProblemDetails";
+    private const string DefaultValidationSchemaId = "CoreValidationProblemDetails";
+    private string? _validationSchemaId;
 
     /// <summary>
     /// Gets or sets the schema identifier referenced by the validation (<c>400</c>) response.
     /// </summary>
     /// <value>
-    /// The schema component name of the <c>ValidationError</c> response. The default value is
-    /// <c>CoreValidationProblemDetails</c>, the validation problem type shipped by this library,
-    /// which is the body documented by <c>ProducesValidationProblemAttribute</c>.
+    /// The schema component name of the <c>ValidationError</c> response. When not set, the value
+    /// is <c>CoreValidationProblemDetails</c> while <see cref="SchemaId"/> keeps its default, and
+    /// <see cref="SchemaId"/> otherwise.
     /// </value>
     public string ValidationSchemaId
     {
-        get => Definitions.FirstOrDefault(definition => definition.StatusCode == "400")?.SchemaId
-            ?? "CoreValidationProblemDetails";
-        set
-        {
-            var validation = Definitions.FirstOrDefault(definition => definition.StatusCode == "400");
-
-            if (validation is not null)
-            {
-                validation.SchemaId = value;
-            }
-        }
+        get => _validationSchemaId
+            ?? (SchemaId == DefaultSchemaId ? DefaultValidationSchemaId : SchemaId);
+        set => _validationSchemaId = value;
     }
 
     /// <summary>
@@ -95,7 +91,7 @@ public sealed class OpenApiProblemResponsesOptions
     /// contains <c>CoreProblemDetails</c>, <c>ProblemDetails</c> and <c>ValidationProblemDetails</c> by default.
     /// </value>
     public IList<string> ProblemSchemaIds { get; } =
-        new List<string> { "CoreProblemDetails", "ProblemDetails", "ValidationProblemDetails" };
+        ["CoreProblemDetails", "ProblemDetails", "ValidationProblemDetails"];
 
     /// <summary>
     /// Gets the response catalog.
@@ -121,7 +117,6 @@ public sealed class OpenApiProblemResponsesOptions
             Title = "Validation error",
             Description = "Validation error",
             Detail = "One or more validation errors occurred.",
-            SchemaId = "CoreValidationProblemDetails",
             Replacement = ProblemResponseReplacementMode.WhenContentMatchesProblemDetails
         };
 

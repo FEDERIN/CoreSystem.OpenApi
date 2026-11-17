@@ -126,7 +126,8 @@ public static class OpenApiDocumentPatcher
             };
         }
 
-        var schemaId = definition.SchemaId ?? options.SchemaId;
+        var schemaId = definition.SchemaId
+            ?? (definition.StatusCode == "400" ? options.ValidationSchemaId : options.SchemaId);
 
         response["content"] = new JsonObject
         {
