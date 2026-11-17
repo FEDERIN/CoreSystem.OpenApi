@@ -34,6 +34,29 @@ public sealed class OpenApiProblemResponsesOptions
     public string SchemaId { get; set; } = "CoreProblemDetails";
 
     /// <summary>
+    /// Gets or sets the schema identifier referenced by the validation (<c>400</c>) response.
+    /// </summary>
+    /// <value>
+    /// The schema component name of the <c>ValidationError</c> response. The default value is
+    /// <c>CoreValidationProblemDetails</c>, the validation problem type shipped by this library,
+    /// which is the body documented by <c>ProducesValidationProblemAttribute</c>.
+    /// </value>
+    public string ValidationSchemaId
+    {
+        get => Definitions.FirstOrDefault(definition => definition.StatusCode == "400")?.SchemaId
+            ?? "CoreValidationProblemDetails";
+        set
+        {
+            var validation = Definitions.FirstOrDefault(definition => definition.StatusCode == "400");
+
+            if (validation is not null)
+            {
+                validation.SchemaId = value;
+            }
+        }
+    }
+
+    /// <summary>
     /// Gets or sets the media type used by the responses.
     /// </summary>
     /// <value>
@@ -98,7 +121,7 @@ public sealed class OpenApiProblemResponsesOptions
             Title = "Validation error",
             Description = "Validation error",
             Detail = "One or more validation errors occurred.",
-            SchemaId = "ValidationProblemDetails",
+            SchemaId = "CoreValidationProblemDetails",
             Replacement = ProblemResponseReplacementMode.WhenContentMatchesProblemDetails
         };
 

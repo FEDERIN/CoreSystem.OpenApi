@@ -5,13 +5,21 @@
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>CoreSystem.OpenApi</PackageId>
-		<Version>2.1.0</Version>
-		<AssemblyVersion>2.1.0.0</AssemblyVersion>
-		<FileVersion>2.1.0.0</FileVersion>
-		<InformationalVersion>2.1.0</InformationalVersion>
+		<Version>2.2.0</Version>
+		<AssemblyVersion>2.2.0.0</AssemblyVersion>
+		<FileVersion>2.2.0.0</FileVersion>
+		<InformationalVersion>2.2.0</InformationalVersion>
 		<Authors>Federin Pastor Gutierrez Ortiz</Authors>
 		<Description>Base contracts and models for the CoreSystem OpenAPI infrastructure.</Description>
 		<PackageReleaseNotes>
+			2.2.0: BREAKING. Default problem schemas are now CoreProblemDetails (replaces ProblemDetails)
+			and CoreValidationProblemDetails (replaces ValidationProblemDetails for the 400 response).
+			OpenApiProblemResponsesOptions.SchemaId defaults to CoreProblemDetails, ProblemSchemaIds
+			includes CoreProblemDetails by default, and the new ValidationSchemaId property controls the
+			400 schema. To restore the previous schema names, set SchemaId = "ProblemDetails" and
+			ValidationSchemaId = "ValidationProblemDetails", and keep both names in ProblemSchemaIds.
+			Consumers that reference ProblemDetails or ValidationProblemDetails in generated clients must
+			update those references.
 			2.1.0: Added ProducesConflictProblemAttribute (HTTP 409) for documenting conflict
 			problem responses. Minor version bump.
 		</PackageReleaseNotes>

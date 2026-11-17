@@ -160,6 +160,33 @@ builder.Services.AddCoreOpenApi(options =>
 
 ---
 
+## 🏗 Architecture
+
+```
+┌──────────────────────────────────────┐
+│  Your ASP.NET Core application       │
+└──────────────┬───────────────────────┘
+               │ AddCoreOpenApi / UseCoreOpenApi
+               ▼
+┌──────────────────────────────────────┐
+│  Core.OpenApi.Swashbuckle            │
+│  (SwaggerGen filters, document       │
+│   patcher, Swagger UI wiring)        │
+└──────────────┬───────────────────────┘
+               │ depends on
+               ▼
+┌──────────────────────────────────────┐
+│  Core.OpenApi                        │
+│  (contracts, options, attributes)     │
+└──────────────────────────────────────┘
+```
+
+The provider builds on top of the dependency-free `Core.OpenApi` contracts:
+it registers Swagger generation, applies the shared filters and maps the patched
+document endpoint, while the base package keeps the options and attributes.
+
+---
+
 ## 📖 Documentation
 
 - Getting Started

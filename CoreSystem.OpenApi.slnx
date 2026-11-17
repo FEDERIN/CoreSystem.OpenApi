@@ -13,20 +13,22 @@
     <File Path=".github/workflows/samples-smoke.yml" />
   </Folder>
   <Folder Name="/docs/">
+    <File Path="docs/Attributes.md" />
     <File Path="docs/GettingStarted.md" />
     <File Path="docs/index.md" />
   </Folder>
-  <Folder Name="/docs/OpenApi/">
-    <File Path="docs/OpenApi/Configuration.md" />
-    <File Path="docs/OpenApi/GettingStarted.md" />
-    <File Path="docs/OpenApi/index.md" />
-    <File Path="docs/OpenApi/ProblemResponses.md" />
+  <Folder Name="/docs/Swashbuckle/">
+    <File Path="docs/Swashbuckle/Configuration.md" />
+    <File Path="docs/Swashbuckle/GettingStarted.md" />
+    <File Path="docs/Swashbuckle/index.md" />
+    <File Path="docs/Swashbuckle/ProblemResponses.md" />
   </Folder>
   <Folder Name="/Elementos de la solución/">
     <File Path="CORE-SYSTEM-STANDARDS.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
     <File Path="mkdocs.yml" />
+    <File Path="README.md" />
   </Folder>
   <Folder Name="/samples/">
     <Project Path="samples/Core.OpenApi.Swashbuckle.Baseline.Sample/Core.OpenApi.Swashbuckle.Baseline.Sample.csproj" />

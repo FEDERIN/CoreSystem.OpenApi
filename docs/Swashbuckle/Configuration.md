@@ -1,4 +1,4 @@
-# Configuration
+# ⚙️ Configuration
 
 Configure via `CoreOpenApiOptions` (extends `OpenApiOptions`):
 
